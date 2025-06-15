@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  # Next.js应用
+  todolist-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: todolist-app
+    ports:
+      - "6017:3000" # 外部6017端口映射到容器内3000端口
+    environment:
+      - DATABASE_URL=postgresql://todolist:password123@postgres:5432/todolist
+      - NODE_ENV=production
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+        reservations:
+          memory: 256M
+          cpus: "0.2"
+    networks:
+      - todolist-network
+
+  # PostgreSQL数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: todolist-db
+    environment:
+      - POSTGRES_DB=todolist
+      - POSTGRES_USER=todolist
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backups:/backups
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U todolist -d todolist"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.3"
+        reservations:
+          memory: 128M
+          cpus: "0.1"
+    command: >
+      postgres 
+      -c shared_buffers=64MB 
+      -c effective_cache_size=128MB 
+      -c max_connections=20
+      -c log_statement=none
+      -c log_duration=off
+    networks:
+      - todolist-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  todolist-network:
+    driver: bridge
