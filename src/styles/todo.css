@@ -1,0 +1,660 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.container { 
+    max-width: 680px;
+    min-height: 600px;
+    padding: 40px 24px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.header {
+    width: 100%;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    margin-bottom: 16px;
+}
+.header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, rgb(37, 99, 235), rgb(147, 51, 234));
+  background-clip: text;  /*只有文字形状的地方放上背景图*/
+  color: transparent;    /*黑色文字透明*/
+}
+.tip {
+    width: 100%;
+    height: 28px;
+    margin-bottom: 24px;
+    text-align: center;
+    line-height: 28px;
+    color: #4b5563;
+}
+.statistic {
+    width: 100%;
+    height: 36px;
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding: 0 150px;
+}
+
+
+
+.statistic .item {
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    padding: 0 16px;
+    background-color: #ffffffB3;
+    color: #4b5563;
+    border-radius: 15px;
+    font-size: 14px;
+}
+.statistic .total span {
+    color:#1F2937;
+    font-weight: 600;
+}
+.statistic .pending span {
+    color:#EA580C;
+    font-weight: 600;
+}
+.statistic .completed span {
+    color:#16A34A;
+    font-weight: 600;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.input-container {
+    flex: 1;
+    position: relative;
+}
+
+.search input {
+    width: 100%;
+    height: 56px;
+    padding: 16px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+}
+
+.search input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.search input.error:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.search input::placeholder {
+    color: #9ca3af;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+    animation: fadeInUp 0.2s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search .button {
+    height: 56px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.search .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.search .button:active {
+    transform: translateY(0);
+}
+
+.search .button svg {
+    width: 18px;
+    height: 18px;
+}
+.tab-list {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.tab-list .box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.box .item {
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.box .item:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.box .active:hover {
+    background: #5a67d8;
+    color: white;
+}
+
+.box .item span {
+    background: #e2e8f0;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.box .active {
+    background: #667eea;
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.box .active span {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+.task-list .task {
+    width: 100%;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+}
+
+.task:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.task .task-main {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.task .check-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.task .check-btn:hover {
+    border-color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.05) !important;
+}
+
+.check-btn.done {
+    background: #22c55e !important;
+    border-color: #22c55e !important;
+}
+
+.check-btn.done:hover {
+    background: #16a34a !important;
+    border-color: #16a34a !important;
+}
+
+.check-btn.done::after {
+    content: '✓';
+    color: white !important;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.task .task-text {
+    margin-left: 16px;
+    color: #1f2937;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    flex: 1;
+}
+
+.task-text.done {
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+.task .task-time {
+    margin-top: 8px;
+    margin-left: 40px;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.operation-area {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.2s ease !important;
+}
+
+.task:hover .operation-area {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.operation-area button {
+    border: none;
+    background: transparent;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.operation-area button:hover {
+    background: #f1f5f9;
+}
+
+.operation-area svg {
+    width: 16px;
+    height: 16px;
+    color: #6b7280;
+    transition: color 0.2s ease;
+}
+
+.operation-area button:hover svg {
+    color: #374151;
+}
+
+/* 编辑状态下始终显示操作按钮 */
+.task .operation-area.editing {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 编辑输入框样式 */
+.edit-input {
+    margin-left: 16px;
+    margin-right: 100px; /* 为操作按钮留出空间 */
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #ffffff;
+    color: #1f2937;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.edit-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 编辑状态的操作按钮 */
+.operation-area.editing button {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+/* 保存按钮 - 绿色 */
+.operation-area.editing button:first-child {
+    background: #22c55e;
+    color: white;
+    border: none;
+}
+
+.operation-area.editing button:first-child:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+.operation-area.editing button:first-child svg {
+    color: white !important;
+}
+
+/* 取消按钮 - 白色背景 */
+.operation-area.editing button:last-child {
+    background: white;
+    color: #6b7280;
+    border: 2px solid #e5e7eb;
+    margin-left: 8px;
+}
+
+.operation-area.editing button:last-child:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: scale(1.05);
+}
+
+.operation-area.editing button:last-child svg {
+    color: #6b7280 !important;
+}
+
+.operation-area.editing svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* 响应式设计 - 移动端适配 */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 20px 16px;
+        border-radius: 0;
+        min-height: 100vh;
+        box-shadow: none;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    /* 移除统计区域在小屏幕上的过大内边距 */
+    .statistic {
+        padding: 0 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .statistic .item {
+        font-size: 12px;
+        padding: 0 12px;
+        height: 32px;
+        line-height: 32px;
+    }
+
+    /* 搜索区域移动端优化 */
+    .search {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .search input {
+        height: 48px;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+
+    .search .button {
+        height: 48px;
+        font-size: 16px;
+        justify-content: center;
+    }
+
+    .input-container {
+        margin-bottom: 0;
+    }
+
+    /* 标签页移动端优化 */
+    .tab-list .box {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .box .item {
+        flex: 1;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    /* 任务列表移动端优化 */
+    .task-list .task {
+        padding: 16px;
+    }
+
+    .task .task-text {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .task .task-time {
+        margin-left: 36px;
+        font-size: 11px;
+    }
+
+    /* 编辑状态移动端优化 */
+    .edit-input {
+        margin-right: 80px;
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+
+    .operation-area.editing button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .operation-area.editing svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* 操作按钮移动端优化 */
+    .operation-area button {
+        padding: 6px;
+    }
+
+    .operation-area svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* 修复移动端标签页居中问题 */
+    .box .item {
+        justify-content: center !important;
+    }
+    
+    .box .item span {
+        margin-left: 6px;
+    }
+}
+
+/* 小屏手机优化 */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .search input {
+        height: 44px;
+        padding: 10px 14px;
+        font-size: 15px;
+    }
+
+    .search .button {
+        height: 44px;
+        padding: 0 16px;
+        font-size: 15px;
+    }
+
+    .box .item {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .task-list .task {
+        padding: 12px;
+    }
+
+    .task .check-btn {
+        width: 20px;
+        height: 20px;
+    }
+
+    .task .task-text {
+        margin-left: 12px;
+        font-size: 14px;
+    }
+
+    .task .task-time {
+        margin-left: 32px;
+        font-size: 10px;
+    }
+
+    .edit-input {
+        margin-left: 12px;
+        margin-right: 70px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .operation-area.editing button {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* 修复移动端标签页居中问题 */
+    .box .item {
+        justify-content: center !important;
+    }
+    
+    .box .item span {
+        margin-left: 4px;
+    }
+}
+
+/* 横屏模式优化 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .container {
+        padding: 12px 16px;
+    }
+
+    .header {
+        margin-bottom: 12px;
+    }
+
+    .search {
+        margin-bottom: 20px;
+    }
+
+    .tab-list {
+        margin-bottom: 20px;
+    }
+
+    .task-list .task {
+        margin-bottom: 12px;
+    }
+} 

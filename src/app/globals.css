@@ -1,3 +1,6 @@
+/* Import our todo styles first */
+@import '../styles/todo.css';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
