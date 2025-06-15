@@ -7,7 +7,7 @@ export async function GET() {
       orderBy: { createdAt: 'desc' }
     })
     return Response.json(todos)
-  } catch (error) {
+  } catch {
     return Response.json(
       { error: 'Failed to fetch todos' }, 
       { status: 500 }
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     })
     
     return Response.json(todo, { status: 201 })
-  } catch (error) {
+  } catch {
     return Response.json(
       { error: 'Failed to create todo' }, 
       { status: 500 }

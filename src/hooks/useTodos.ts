@@ -24,7 +24,7 @@ export function useTodos() {
         throw new Error('Failed to fetch todos')
       }
       const data = await response.json()
-      setTodos(data.map((todo: any) => ({
+      setTodos(data.map((todo: Todo) => ({
         ...todo,
         createdAt: new Date(todo.createdAt),
         updatedAt: new Date(todo.updatedAt)

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
 import { useTodos } from '@/hooks/useTodos'
 import { TodoStatus } from '@/lib/types'
 import TodoTabs from './TodoTabs'
