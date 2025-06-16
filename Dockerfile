@@ -35,12 +35,18 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=deps /app/node_modules ./node_modules
+
+# 复制完整的 node_modules（包含 Prisma 客户端）和必要文件
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/package*.json ./
 
 # 复制启动脚本
 COPY start.sh ./start.sh
 RUN chmod +x start.sh
+
+# 确保 nextjs 用户对必要目录有写入权限
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 

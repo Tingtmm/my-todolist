@@ -11,6 +11,10 @@ done
 
 echo "✅ 数据库连接成功"
 
+# 生成 Prisma 客户端（确保在运行时可用）
+echo "🔧 生成 Prisma 客户端..."
+npx prisma generate
+
 # 运行数据库迁移
 echo "🔄 运行数据库迁移..."
 npx prisma db push
